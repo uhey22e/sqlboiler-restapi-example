@@ -25,5 +25,6 @@ func (x *ServerImpl) ListUsers(w http.ResponseWriter, r *http.Request) {
 
 func Handler() http.Handler {
 	x := &ServerImpl{}
-	return restapi.Handler(x)
+	h := restapi.Handler(x)
+	return h
 }

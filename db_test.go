@@ -1,28 +1,13 @@
 package app
 
 import (
-	"database/sql"
 	"path/filepath"
 	"testing"
-
-	"github.com/jackc/pgx/v4"
-	"github.com/jackc/pgx/v4/log/zerologadapter"
-	"github.com/jackc/pgx/v4/stdlib"
-	"github.com/rs/zerolog/log"
 )
 
 func testConfigureDatabase(t testing.TB) {
 	t.Helper()
-	var err error
-	uri := "postgres://postgres:password@postgres/postgres?sslmode=disable"
-	c, _ := pgx.ParseConfig(uri)
-	c.Logger = zerologadapter.NewLogger(log.Logger)
-	c.LogLevel = pgx.LogLevelInfo
-
-	db, err = sql.Open("pgx", stdlib.RegisterConnConfig(c))
-	if err != nil {
-		t.Fatal(err)
-	}
+	configureDatabase()
 
 	queries, err := LoadSqlFile(filepath.Join("testdata", "seeds.sql"))
 	if err != nil {

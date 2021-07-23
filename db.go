@@ -19,7 +19,7 @@ var (
 	cfg *dbConfig
 )
 
-func ConfigureDatabase() {
+func configureDatabase() {
 	var err error
 	db, err = sql.Open("pgx", cfg.URL)
 	if err != nil {
@@ -54,5 +54,5 @@ func init() {
 	if err := env.Parse(cfg); err != nil {
 		panic(err)
 	}
-	ConfigureDatabase()
+	configureDatabase()
 }
