@@ -1,0 +1,34 @@
+openapi: 3.0.0
+
+info:
+  title: SQLBoiler and oapi-codegen Example
+  version: 0.0.1
+
+paths:
+  /user:
+    get:
+      description: Returns an array of User
+      operationId: listUsers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: "Emmett Brown"

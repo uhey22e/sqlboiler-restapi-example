@@ -1,0 +1,39 @@
+.
+├── Makefile
+├── README.md
+├── app.go
+├── app_test.go
+├── boiler
+│   ├── boil_queries.go
+│   ├── boil_table_names.go
+│   ├── boil_types.go
+│   ├── event.go
+│   ├── event_user.go
+│   ├── psql_upsert.go
+│   └── user.go
+├── cmd
+│   └── server
+├── db.go
+├── db_test.go
+├── event.go
+├── event_test.go
+├── go.mod
+├── go.sum
+├── openapi.yml
+├── restapi
+│   ├── server.go
+│   └── types.go
+├── sql
+│   ├── V1.0.0.0__create_extensions.sql
+│   └── V1.0.0.1__create_tables.sql
+├── sqlboiler.toml
+├── testdata
+│   └── seeds.sql
+├── tmp
+│   ├── build-errors.log
+│   └── main
+├── tree.txt
+├── user.go
+└── user_test.go
+
+7 directories, 29 files

@@ -1,0 +1,14 @@
+output     = "boiler"
+pkgname    = "boiler"
+wipe       = true
+no-tests   = true
+tag-ignore = ["created_at"]
+struct-tag-casing  = "camel"
+
+[psql]
+  dbname  = "postgres"
+  host    = "postgres"
+  user    = "postgres"
+  pass    = "password"
+  sslmode = "disable"
+  blacklist = ["flyway_schema_history"]
