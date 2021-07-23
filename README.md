@@ -6,7 +6,8 @@ An boielrplate of REST API server using following tools.
 - [oapi-codegen](https://github.com/deepmap/oapi-codegen) for REST API Interface 
 
 This repository is an addendum of this post.
-[post](https://future-architect.github.io/)
+
+https://future-architect.github.io/
 
 
 ## Prerequisites
@@ -24,7 +25,7 @@ If you are opening this project via VSCode Remote Container, these tools are alr
 .
 ├── boiler          # Generated codes by SQLBoiler
 ├── restapi         # Generated codes by oapi-codegen
-├── sql             # Table definitions
+├── sql             # Database table definitions
 ├── openapi.yml     # API definition
 ├── cmd
 │   └── server      # Run server
@@ -38,7 +39,7 @@ If you are opening this project via VSCode Remote Container, these tools are alr
 
 ### Generate code
 
-Regenerate code when you following codes.
+Regenerate code when you modify following codes.
 
 - `sql/*.sql`: Database table definitions.
 - `openapi.yml`: API definitions.
@@ -46,12 +47,13 @@ Regenerate code when you following codes.
 ```
 make clean
 make generate
+go mod tidy
 ```
 
 ### Run local server
 
 ```
-$ air
+air
 ```
 
 ## App Configurations
