@@ -7,7 +7,7 @@ An boielrplate of REST API server using following tools.
 
 This repository is an addendum of this post.
 
-https://future-architect.github.io/
+https://future-architect.github.io/articles/20210730a/
 
 
 ## Prerequisites
