@@ -26,13 +26,13 @@ If you are opening this project via VSCode Remote Container, these tools are alr
 ├── boiler          # Generated codes by SQLBoiler
 ├── restapi         # Generated codes by oapi-codegen
 ├── sql             # Database table definitions
-├── openapi.yml     # API definition
+├── openapi.yml     # REST API definitions
 ├── cmd
 │   └── server      # Run server
-├── testdata        # Test data
 ├── app.go          # Server implementation
 ├── db.go           # Database configurations
-├── event.go
+├── middleware.go   # net/http middlewares
+├── event.go        # Select/Insert data from/to the database with types defined in REST API specs.
 └── user.go
 ```
 
