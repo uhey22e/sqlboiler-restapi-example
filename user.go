@@ -1,3 +1,4 @@
+//go:generate refiller -o refiller -s boiler.User -d restapi.User
 package app
 
 import (

@@ -1,3 +1,4 @@
+//go:generate refiller -o refiller -s boiler.Event -d restapi.Event
 package app
 
 import (
@@ -7,6 +8,7 @@ import (
 
 	"github.com/deepmap/oapi-codegen/pkg/types"
 	"github.com/uhey22e/sqlboiler-restapi-example/boiler"
+	"github.com/uhey22e/sqlboiler-restapi-example/refiller"
 	"github.com/uhey22e/sqlboiler-restapi-example/restapi"
 	"github.com/volatiletech/sqlboiler/v4/queries"
 	"github.com/volatiletech/sqlboiler/v4/queries/qm"
@@ -23,20 +25,11 @@ func ListEvents(ctx context.Context) ([]*restapi.Event, error) {
 
 	res := make([]*restapi.Event, len(rows))
 	for i, e := range rows {
+		res[i] = refiller.NewRestapiEvent(e)
+		res[i].Date = types.Date{Time: e.Date}
 		participants := make([]*restapi.User, len(e.R.EventUsers))
 		for j := range e.R.EventUsers {
-			u := e.R.EventUsers[j].R.User
-			participants[j] = &restapi.User{
-				Id:   u.ID,
-				Name: u.Name,
-			}
-		}
-		res[i] = &restapi.Event{
-			Id:           e.ID,
-			Name:         e.Name,
-			Description:  e.Description,
-			Date:         types.Date{Time: e.Date},
-			Participants: participants,
+			participants[j] = refiller.NewRestapiUser(e.R.EventUsers[j].R.User)
 		}
 	}
 	return res, nil

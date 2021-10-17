@@ -3,8 +3,8 @@ OPENAPI_YML := openapi.yml
 OAPI_PACKAGE := restapi
 SQLBOILER_PACKAGE := boiler
 
-.PHONY: generate
-generate: $(SQLBOILER_PACKAGE) $(OAPI_PACKAGE)/types.go $(OAPI_PACKAGE)/server.go
+.PHONY: generate refiller
+generate: $(SQLBOILER_PACKAGE) $(OAPI_PACKAGE)/types.go $(OAPI_PACKAGE)/server.go refiller
 $(SQLBOILER_PACKAGE):
 	sqlboiler -o $(SQLBOILER_PACKAGE) -p $(SQLBOILER_PACKAGE) psql
 $(OAPI_PACKAGE):
@@ -15,6 +15,8 @@ $(OAPI_PACKAGE)/types.go: $(OPENAPI_YML) restapi
 	rm -f $@.tmp
 $(OAPI_PACKAGE)/server.go: $(OPENAPI_YML) restapi
 	oapi-codegen -generate chi-server -package $(OAPI_PACKAGE) -o $@ $<
+refiller:
+	go generate
 
 clean:
 	rm -rf $(SQLBOILER_PACKAGE)
