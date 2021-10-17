@@ -6,7 +6,6 @@ import (
 
 	"github.com/caarlos0/env/v6"
 	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	app "github.com/uhey22e/sqlboiler-restapi-example"
@@ -34,9 +33,7 @@ func main() {
 	configureLogger()
 
 	r := chi.NewRouter()
-	r.Use(middleware.Logger)
-
-	app := app.Handler()
-	r.Mount("/", app)
+	h := app.Handler()
+	r.Mount("/", h)
 	http.ListenAndServe(":8080", r)
 }

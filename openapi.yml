@@ -5,18 +5,42 @@ info:
   version: 0.0.1
 
 paths:
-  /user:
+  /users:
     get:
       description: Returns an array of User
       operationId: listUsers
       responses:
-        '200':
+        "200":
           content:
             application/json:
-              schema: 
+              schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
+                  $ref: "#/components/schemas/User"
+  /events:
+    get:
+      description: Returns an array of events
+      operationId: listEvents
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Event"
+  /popular-events:
+    get:
+      description: Returns an array of popular events
+      operationId: listPopularEvents
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PopularEvent"
 
 components:
   schemas:
@@ -32,3 +56,57 @@ components:
         name:
           type: string
           example: "Emmett Brown"
+    Event:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - date
+        - participants
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: "Awesome Event"
+        description:
+          type: string
+          example: "Description of the event."
+        date:
+          type: string
+          format: date
+        participants:
+          type: array
+          items:
+            $ref: "#/components/schemas/User"
+          x-go-type: "[]*User"
+    PopularEvent:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - date
+        - participants
+        - registrationsInThePastWeek
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: "Awesome Event"
+        description:
+          type: string
+          example: "Description of the event."
+        date:
+          type: string
+          format: date
+        participants:
+          type: integer
+          example: 10
+        registrationsInThePastWeek:
+          type: integer
+          example: 3
