@@ -15,6 +15,9 @@ type ServerInterface interface {
 	// (GET /events)
 	ListEvents(w http.ResponseWriter, r *http.Request)
 
+	// (GET /popular-events)
+	ListPopularEvents(w http.ResponseWriter, r *http.Request)
+
 	// (GET /users)
 	ListUsers(w http.ResponseWriter, r *http.Request)
 }
@@ -34,6 +37,21 @@ func (siw *ServerInterfaceWrapper) ListEvents(w http.ResponseWriter, r *http.Req
 
 	var handler = func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.ListEvents(w, r)
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler(w, r.WithContext(ctx))
+}
+
+// ListPopularEvents operation middleware
+func (siw *ServerInterfaceWrapper) ListPopularEvents(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	var handler = func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.ListPopularEvents(w, r)
 	}
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -123,6 +141,9 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 
 	r.Group(func(r chi.Router) {
 		r.Get(options.BaseURL+"/events", wrapper.ListEvents)
+	})
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/popular-events", wrapper.ListPopularEvents)
 	})
 	r.Group(func(r chi.Router) {
 		r.Get(options.BaseURL+"/users", wrapper.ListUsers)

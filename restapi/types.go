@@ -16,6 +16,16 @@ type Event struct {
 	Participants []*User            `json:"participants" boil:"participants"`
 }
 
+// PopularEvent defines model for PopularEvent.
+type PopularEvent struct {
+	Date                       openapi_types.Date `json:"date" boil:"date"`
+	Description                string             `json:"description" boil:"description"`
+	Id                         string             `json:"id" boil:"id"`
+	Name                       string             `json:"name" boil:"name"`
+	Participants               int                `json:"participants" boil:"participants"`
+	RegistrationsInThePastWeek int                `json:"registrationsInThePastWeek" boil:"registrations_in_the_past_week"`
+}
+
 // User defines model for User.
 type User struct {
 	Id   string `json:"id" boil:"id"`
