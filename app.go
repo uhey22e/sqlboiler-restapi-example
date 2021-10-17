@@ -11,7 +11,7 @@ type ServerImpl struct{}
 
 func (x *ServerImpl) ListUsers(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	users, err := ListUsersAPI(ctx)
+	users, err := ListUsers(ctx)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
@@ -21,6 +21,9 @@ func (x *ServerImpl) ListUsers(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+}
+
+func (x *ServerImpl) ListEvents(w http.ResponseWriter, r *http.Request) {
 }
 
 func Handler() http.Handler {
